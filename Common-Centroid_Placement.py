@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -107,6 +107,20 @@ class PlacementEvaluator:
                 pm[r, c] = UnitCapacitor(int(arr[r, c]), self.unit_cap_size)
         self.placement_map = pm
         return pm
+
+    def _get_unit_locations(self):
+        """Collect coordinates for each bit index from the current placement_map.
+        Returns a dict: {bit_index: [(r, c), ...]} including bit 0 (B0).
+        """
+        if self.placement_map is None:
+            return {bit: [] for bit in range(0, self.N_bits + 1)}
+        locs = {bit: [] for bit in range(0, self.N_bits + 1)}
+        for r in range(self.rows):
+            for c in range(self.cols):
+                u = self.placement_map[r, c]
+                if u is not None:
+                    locs[u.bit_index].append((r, c))
+        return locs
 
     def _precompute_rho_ab_and_dist(self):
         coords = [(r, c) for r in range(self.rows) for c in range(self.cols)
