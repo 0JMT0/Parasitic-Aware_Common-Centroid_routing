@@ -33,22 +33,19 @@ python -m pip install numpy matplotlib
 ### 1. Evaluate an existing layout
 
 ```bash
-python Common-Centroid_Placement.py evaluate ./code_placement.txt \
-  --print-grid --alpha 0.2 --beta 0.2 --gamma 0.1 --neigh-th 1.5
+python Common-Centroid_Placement.py evaluate ./code_placement.txt --print-grid --alpha 0.2 --beta 0.2 --gamma 0.1 --neigh-th 1.5
 ```
 
 ### 2. Synthesize a placement from scratch
 
 ```bash
-python Common-Centroid_Placement.py synthesize --nbits 6 --include-b0 \
-  --show --restarts 4 --sa-iters 8000 --w-sym 5.0 --out best_layout.txt
+python Common-Centroid_Placement.py synthesize --nbits 6 --include-b0 --show --restarts 4 --sa-iters 8000 --w-sym 5.0 --out best_layout.txt
 ```
 
 ### 3. Route a layout (top plate example)
 
 ```bash
-python MST_Routing_topToCP.py --layout-file best_layout.txt \
-  --method mst --mode random
+python MST_Routing_topToCP.py --layout-file best_layout.txt --method mst --mode random
 ```
 
 ### 4. Run the CP-sequence GA standalone
@@ -60,8 +57,7 @@ python CP-seq_GA.py
 ### 5. End-to-end demo
 
 ```bash
-python Parasitic-Aware.py --layout best_layout.txt \
-  --top-mode both --bottom-mode random --show-plots
+python Parasitic-Aware.py --layout best_layout.txt --top-mode both --bottom-mode random --show-plots
 ```
 
 (omit `--layout` to let the demo synthesize a layout using `--nbits`.)
